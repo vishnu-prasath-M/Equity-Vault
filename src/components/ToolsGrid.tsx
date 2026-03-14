@@ -1,8 +1,10 @@
-import { tools } from "@/data/mockData";
+import { toolEntries } from "@/data/mockData";
 import { ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ToolsGrid = () => {
+  const featured = toolEntries.slice(0, 6);
+
   return (
     <section className="py-16 px-4 sm:px-6 bg-secondary/30">
       <div className="max-w-7xl mx-auto">
@@ -11,7 +13,7 @@ const ToolsGrid = () => {
           <p className="text-sm text-muted-foreground mt-1">Tools trusted by top-performing founders.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tools.map((tool, i) => (
+          {featured.map((tool, i) => (
             <motion.a
               key={tool.name}
               href={tool.url}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,17 +7,32 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   {
     label: "Case Studies",
-    children: ["All Stories", "By Revenue", "By Business Model"],
+    href: "/case-studies",
+    children: [
+      { label: "All Stories", href: "/case-studies" },
+      { label: "By Revenue", href: "/case-studies" },
+      { label: "By Business Model", href: "/case-studies" },
+    ],
   },
   {
     label: "Idea Vault",
-    children: ["Niche Database", "Trending Now", "Low Capital"],
+    href: "/idea-vault",
+    children: [
+      { label: "Niche Database", href: "/idea-vault" },
+      { label: "Trending Now", href: "/idea-vault" },
+      { label: "Low Capital", href: "/idea-vault" },
+    ],
   },
   {
     label: "The Stack",
-    children: ["Marketing Tools", "Tech Stack", "AI Tools"],
+    href: "/tools",
+    children: [
+      { label: "Marketing Tools", href: "/tools" },
+      { label: "Tech Stack", href: "/tools" },
+      { label: "AI Tools", href: "/tools" },
+    ],
   },
-  { label: "Playbooks", children: null },
+  { label: "Calculator", href: "/calculator", children: null },
 ];
 
 const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
@@ -27,9 +43,9 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-border/50 h-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
         <div className="flex items-center gap-8">
-          <a href="/" className="text-lg font-bold tracking-tight text-foreground">
+          <Link to="/" className="text-lg font-bold tracking-tight text-foreground">
             FoundersVault
-          </a>
+          </Link>
           <div className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
               <div
@@ -38,10 +54,13 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
                 onMouseEnter={() => item.children && setOpenDropdown(item.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
-                <button className="flex items-center gap-1 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg">
+                <Link
+                  to={item.href}
+                  className="flex items-center gap-1 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg"
+                >
                   {item.label}
                   {item.children && <ChevronDown className="w-3 h-3" />}
-                </button>
+                </Link>
                 <AnimatePresence>
                   {item.children && openDropdown === item.label && (
                     <motion.div
@@ -52,13 +71,13 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
                       className="absolute top-full left-0 mt-1 w-48 bg-card card-shadow rounded-xl p-1.5 border border-border/50"
                     >
                       {item.children.map((child) => (
-                        <a
-                          key={child}
-                          href="#"
+                        <Link
+                          key={child.label}
+                          to={child.href}
                           className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors"
                         >
-                          {child}
-                        </a>
+                          {child.label}
+                        </Link>
                       ))}
                     </motion.div>
                   )}
@@ -79,8 +98,8 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
               ⌘K
             </kbd>
           </button>
-          <Button size="sm" className="hidden sm:inline-flex rounded-lg text-sm h-8">
-            Start Learning
+          <Button size="sm" className="hidden sm:inline-flex rounded-lg text-sm h-8" asChild>
+            <Link to="/case-studies">Start Learning</Link>
           </Button>
           <button
             className="lg:hidden p-2 text-muted-foreground"
@@ -101,17 +120,18 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
           >
             <div className="px-4 py-3 space-y-1">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href="#"
+                  to={item.href}
+                  onClick={() => setMobileOpen(false)}
                   className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
               <div className="pt-2">
-                <Button size="sm" className="w-full rounded-lg text-sm">
-                  Start Learning
+                <Button size="sm" className="w-full rounded-lg text-sm" asChild>
+                  <Link to="/case-studies" onClick={() => setMobileOpen(false)}>Start Learning</Link>
                 </Button>
               </div>
             </div>

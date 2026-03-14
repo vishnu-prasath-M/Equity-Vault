@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import SearchOverlay from "@/components/SearchOverlay";
 import HeroSection from "@/components/HeroSection";
@@ -12,21 +12,7 @@ import FooterSection from "@/components/FooterSection";
 import { caseStudies } from "@/data/mockData";
 
 const Index = () => {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
-
-  const toggleSearch = useCallback(() => setSearchOpen((p) => !p), []);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        toggleSearch();
-      }
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [toggleSearch]);
 
   const filtered =
     activeFilter === "All"
@@ -35,9 +21,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar onSearchOpen={toggleSearch} />
-      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-      <HeroSection onSearchOpen={toggleSearch} />
+      <HeroSection onSearchOpen={() => {
+        // Trigger CMD+K via keyboard event
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
+      }} />
       <FilterBar active={activeFilter} onChange={setActiveFilter} />
       <CaseStudyGrid studies={filtered} />
       <IdeaVault />

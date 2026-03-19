@@ -1,93 +1,141 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Search, ChevronDown, Menu, X, User, ArrowUpRight, Sparkles, Lightbulb, Wrench, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navItems = [
-  {
-    label: "Case Studies",
-    href: "/case-studies",
-    children: [
-      { label: "All Stories", href: "/case-studies" },
-      { label: "By Revenue", href: "/case-studies" },
-      { label: "By Business Model", href: "/case-studies" },
-    ],
-  },
-  {
-    label: "Idea Vault",
-    href: "/idea-vault",
-    children: [
-      { label: "Niche Database", href: "/idea-vault" },
-      { label: "Trending Now", href: "/idea-vault" },
-      { label: "Low Capital", href: "/idea-vault" },
-    ],
-  },
-  {
-    label: "The Stack",
-    href: "/tools",
-    children: [
-      { label: "Marketing Tools", href: "/tools" },
-      { label: "Tech Stack", href: "/tools" },
-      { label: "AI Tools", href: "/tools" },
-    ],
-  },
-  { label: "Calculator", href: "/calculator", children: null },
-];
+import { useAuth } from "@/contexts/AuthContext";
+import { Menu as NavMenu, MenuItem, ProductItem, HoveredLink } from "@/components/ui/navbar-menu";
+import { caseStudies, businessIdeas, toolEntries } from "@/data/mockData";
 
 const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [active, setActive] = useState<string | null>(null);
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleStartLearning = () => {
+    if (isAuthenticated) {
+      navigate('/case-studies');
+    } else {
+      navigate('/auth?redirect=/case-studies');
+    }
+  };
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  // Get featured items for dropdowns
+  const featuredStudies = caseStudies.slice(0, 2);
+  const trendingIdeas = businessIdeas.filter(i => i.trending).slice(0, 2);
+  const topTools = toolEntries.slice(0, 4);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-border/50 h-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <Link to="/" className="text-lg font-bold tracking-tight text-foreground">
-            FoundersVault
+        {/* Left - Logo */}
+        <div className="flex items-center shrink-0">
+          <Link to="/" className="flex items-center shrink-0">
+            <img
+              src="/logo.png"
+              alt="EquityVault"
+              className="h-7 w-auto"
+            />
           </Link>
-          <div className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => item.children && setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <Link
-                  to={item.href}
-                  className="flex items-center gap-1 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-lg"
-                >
-                  {item.label}
-                  {item.children && <ChevronDown className="w-3 h-3" />}
-                </Link>
-                <AnimatePresence>
-                  {item.children && openDropdown === item.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-1 w-48 bg-card card-shadow rounded-xl p-1.5 border border-border/50"
-                    >
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          to={child.href}
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="flex items-center gap-3">
+
+        {/* Center - Desktop Nav */}
+        <div className="hidden lg:flex items-center">
+          <NavMenu setActive={setActive}>
+            {/* Case Studies */}
+            <MenuItem setActive={setActive} active={active} item="Case Studies">
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {featuredStudies.map((study) => (
+                    <ProductItem
+                      key={study.id}
+                      title={study.title}
+                      to={`/case-study/${study.id}`}
+                      src={study.image}
+                      description={`${study.founder} • $${study.revenue}/mo`}
+                    />
+                  ))}
+                </div>
+                <div className="pt-3 border-t border-slate-100">
+                  <HoveredLink to="/case-studies">
+                    <Sparkles className="w-4 h-4" />
+                    View All Stories
+                  </HoveredLink>
+                </div>
+              </div>
+            </MenuItem>
+
+            {/* Idea Vault */}
+            <MenuItem setActive={setActive} active={active} item="Idea Vault">
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {trendingIdeas.map((idea) => (
+                    <ProductItem
+                      key={idea.id}
+                      title={idea.niche}
+                      to="/idea-vault"
+                      src={idea.image || idea.brandLogo}
+                      description={`${idea.marketSize} market • ${idea.capitalRequired}`}
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-col gap-2 pt-3 border-t border-slate-100">
+                  <HoveredLink to="/idea-vault?filter=trending">
+                    <Lightbulb className="w-4 h-4" />
+                    Trending Now
+                  </HoveredLink>
+                  <HoveredLink to="/idea-vault?capital=low">
+                    Low Capital Ideas
+                  </HoveredLink>
+                </div>
+              </div>
+            </MenuItem>
+
+            {/* The Stack */}
+            <MenuItem setActive={setActive} active={active} item="The Stack">
+              <div className="flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-4">
+                  {topTools.slice(0, 2).map((tool) => (
+                    <ProductItem
+                      key={tool.id}
+                      title={tool.name}
+                      to="/tools"
+                      src={tool.logo}
+                      description={`${tool.category} • ${tool.rating}★`}
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-col gap-2 pt-3 border-t border-slate-100">
+                  <HoveredLink to="/tools">
+                    <Wrench className="w-4 h-4" />
+                    All Tools
+                  </HoveredLink>
+                </div>
+              </div>
+            </MenuItem>
+          </NavMenu>
+          {/* Calculator - standalone outside NavMenu so clicks aren't swallowed */}
+          <Link
+            to="/calculator"
+            className="text-sm text-slate-600 hover:text-slate-900 transition-colors px-3 py-2 rounded-md hover:bg-slate-50"
+          >
+            Calculator
+          </Link>
+        </div>
+
+        {/* Right - Actions */}
+        <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={onSearchOpen}
             className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
@@ -98,9 +146,44 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
               ⌘K
             </kbd>
           </button>
-          <Button size="sm" className="hidden sm:inline-flex rounded-lg text-sm h-8" asChild>
-            <Link to="/case-studies">Start Learning</Link>
+          <Button
+            size="sm"
+            className="hidden sm:inline-flex rounded-lg text-sm h-8"
+            onClick={handleStartLearning}
+          >
+            Start Learning
           </Button>
+
+          {/* Profile / Auth */}
+          {isAuthenticated ? (
+            <div className="relative">
+              <Link
+                to="/profile"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full bg-slate-100 border border-slate-200"
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-semibold text-xs border border-emerald-200">
+                    {getInitials(user?.name || 'U')}
+                  </div>
+                )}
+              </Link>
+            </div>
+          ) : (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hidden sm:inline-flex rounded-lg text-sm h-8"
+              asChild
+            >
+              <Link to="/auth">Sign In</Link>
+            </Button>
+          )}
           <button
             className="lg:hidden p-2 text-muted-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -119,16 +202,18 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
             className="lg:hidden bg-card border-b border-border/50 overflow-hidden"
           >
             <div className="px-4 py-3 space-y-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <Link to="/case-studies" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg">
+                Case Studies
+              </Link>
+              <Link to="/idea-vault" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg">
+                Idea Vault
+              </Link>
+              <Link to="/tools" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg">
+                The Stack
+              </Link>
+              <Link to="/calculator" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg">
+                Calculator
+              </Link>
               <div className="pt-2">
                 <Button size="sm" className="w-full rounded-lg text-sm" asChild>
                   <Link to="/case-studies" onClick={() => setMobileOpen(false)}>Start Learning</Link>

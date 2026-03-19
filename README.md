@@ -1,18 +1,19 @@
-# Welcome to your Lovable project
+# EquityVault
+
+Discover profitable business ideas and tools for founders.
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Name**: EquityVault
+**Description**: A platform for discovering profitable business ideas and tools for founders
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+**Use EquityVault**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+Simply visit the EquityVault application and start exploring business ideas and tools.
 
 **Use your preferred IDE**
 
@@ -62,12 +63,8 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+You can deploy this project using any modern hosting service like Vercel, Netlify, or your preferred platform.
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to this project?
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Yes, you can connect a custom domain using your hosting provider's domain settings.

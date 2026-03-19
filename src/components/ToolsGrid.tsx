@@ -17,6 +17,8 @@ const ToolsGrid = () => {
             <motion.a
               key={tool.name}
               href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -24,8 +26,16 @@ const ToolsGrid = () => {
               className="group flex items-center justify-between p-4 rounded-xl bg-card card-shadow hover:card-shadow-hover transition-all duration-200"
             >
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-sm font-bold text-foreground">
-                  {tool.name.charAt(0)}
+                <div className="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center p-1.5">
+                  <img 
+                    src={tool.logo} 
+                    alt={tool.name}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                      (e.target as HTMLImageElement).parentElement!.innerHTML = `<span class="text-sm font-bold text-foreground">${tool.name.charAt(0)}</span>`;
+                    }}
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-foreground">{tool.name}</p>

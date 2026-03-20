@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { caseStudies } from "@/data/mockData";
-import { 
-  Check, ChevronLeft, TrendingUp, DollarSign, BarChart3, Users, 
+import {
+  Check, ChevronLeft, TrendingUp, DollarSign, BarChart3, Users,
   Clock, Percent, ArrowUpRight, ExternalLink, Layers
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -29,31 +29,31 @@ const CaseStudyDetail = () => {
   const netProfit = study.revenue - study.expenses;
 
   const stats = [
-    { 
-      label: "Monthly Revenue", 
-      value: `$${study.revenue.toLocaleString()}`, 
-      icon: DollarSign, 
+    {
+      label: "Monthly Revenue",
+      value: `$${study.revenue.toLocaleString()}`,
+      icon: DollarSign,
       color: "text-emerald-600",
       bgColor: "bg-emerald-50"
     },
-    { 
-      label: "Monthly Expenses", 
-      value: `$${study.expenses.toLocaleString()}`, 
-      icon: BarChart3, 
+    {
+      label: "Monthly Expenses",
+      value: `$${study.expenses.toLocaleString()}`,
+      icon: BarChart3,
       color: "text-slate-700",
       bgColor: "bg-slate-100"
     },
-    { 
-      label: "Net Profit", 
-      value: `$${netProfit.toLocaleString()}`, 
-      icon: TrendingUp, 
+    {
+      label: "Net Profit",
+      value: `$${netProfit.toLocaleString()}`,
+      icon: TrendingUp,
       color: "text-emerald-600",
       bgColor: "bg-emerald-50"
     },
-    { 
-      label: "Growth Rate", 
-      value: `+${study.growthRate}% MoM`, 
-      icon: ArrowUpRight, 
+    {
+      label: "Growth Rate",
+      value: `+${study.growthRate}% MoM`,
+      icon: ArrowUpRight,
       color: "text-emerald-600",
       bgColor: "bg-emerald-50"
     },
@@ -95,7 +95,7 @@ const CaseStudyDetail = () => {
             <div className="w-full sm:w-48 h-32 sm:h-32 rounded-2xl overflow-hidden bg-slate-100 shrink-0 shadow-sm">
               <img src={study.image} alt={study.title} className="w-full h-full object-cover" />
             </div>
-            
+
             <div className="flex-1">
               {/* Badges */}
               <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -266,7 +266,7 @@ const CaseStudyDetail = () => {
                 <Layers className="w-5 h-5 text-slate-400" />
                 Tech Stack
               </h2>
-              
+
               <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
                 {study.techStack.map((tool) => (
                   <motion.a
@@ -278,8 +278,8 @@ const CaseStudyDetail = () => {
                     className="group flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
                   >
                     <div className="shrink-0 w-10 h-10 rounded-lg bg-white border border-slate-100 shadow-sm flex items-center justify-center p-1.5 overflow-hidden">
-                      <img 
-                        src={tool.logo} 
+                      <img
+                        src={tool.logo}
                         alt={tool.name}
                         className="w-full h-full object-contain"
                         onError={(e) => {
@@ -314,12 +314,15 @@ const CaseStudyDetail = () => {
                 <p className="text-xs text-slate-400 mb-3">
                   Get access to the complete SOPs and templates used by {study.founder}.
                 </p>
-                <Button 
-                  size="sm" 
+                <Button
+                  size="sm"
                   className="w-full bg-white text-slate-900 hover:bg-slate-100"
+                  asChild
                 >
-                  Get Full Playbook
-                  <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
+                  <Link to={`/case-study/${study.id}/playbook`}>
+                    Get Full Playbook
+                    <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
+                  </Link>
                 </Button>
               </div>
             </motion.aside>

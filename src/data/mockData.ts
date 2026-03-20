@@ -1,19 +1,61 @@
 // Brand logos via Simple Icons CDN (reliable SVG sources)
+import stripe from "../assets/logos/stripe.png";
+import shopify from "../assets/logos/shopify.png";
+import convertkit from "../assets/Convertkit.jpg";
+import beehiiv from "../assets/Beehiiv.jpg";
+import vercel from "../assets/logos/vercel.png";
+import notion from "../assets/logos/notion.png";
+import slack from "../assets/slack.jpg";
+import ahrefs from "../assets/Ahrefs.jpg";
+import figma from "../assets/logos/figma.png";
+import supabase from "../assets/logos/supabase.png";
+import linear from "../assets/logos/linear.png";
+import loom from "../assets/logos/loom.png";
+import framer from "../assets/logos/framer.png";
+import openai from "../assets/OpenAI.jpg";
+import tiktok from "../assets/logos/tiktok.png";
+import shipbob from "../assets/logos/shipbob.png";
+import nextjs from "../assets/logos/nextjs.png";
+import tailwind from "../assets/logos/tailwind.png";
+import react from "../assets/logos/react.png";
+import aws from "../assets/logos/aws.png";
+import gcp from "../assets/logos/gcp.png";
+import typescript from "../assets/logos/typescript.png";
+import postgresql from "../assets/logos/postgresql.png";
+import redis from "../assets/logos/redis.png";
+import docker from "../assets/logos/docker.png";
+import kubernetes from "../assets/logos/kubernetes.png";
+import github from "../assets/logos/github.png";
+import gitlab from "../assets/logos/gitlab.png";
+import sendgrid from "../assets/logos/sendgrid.png";
+import mailgun from "../assets/logos/mailgun.png";
+import plausible from "../assets/logos/plausible.png";
+import google_analytics from "../assets/logos/google_analytics.png";
+import webflow from "../assets/logos/webflow.png";
+import bubble from "../assets/Bubble.jpg";
+import lemon_squeezy from "../assets/logos/lemon_squeezy.png";
+import canva from "../assets/Canva.jpg";
+
 export const brandLogos: Record<string, string> = {
   stripe: "https://cdn.simpleicons.org/stripe/635BFF",
   shopify: "https://cdn.simpleicons.org/shopify/96BF48",
-  convertkit: "https://cdn.simpleicons.org/convertkit/FF7E75",
-  beehiiv: "https://cdn.simpleicons.org/beehiiv/FF6B35",
+  // convertkit: "https://cdn.simpleicons.org/convertkit/FF7E75",
+  convertkit: convertkit,
+  // beehiiv: "https://cdn.simpleicons.org/beehiiv/FF6B35",
+  beehiiv: beehiiv,
   vercel: "https://cdn.simpleicons.org/vercel/000000",
   notion: "https://cdn.simpleicons.org/notion/000000",
-  slack: "https://cdn.simpleicons.org/slack/4A154B",
-  ahrefs: "https://cdn.simpleicons.org/ahrefs/054ADA",
+  // slack: "https://cdn.simpleicons.org/slack/4A154B",
+  slack:slack,
+  // ahrefs: "https://cdn.simpleicons.org/ahrefs/054ADA",
+   ahrefs:ahrefs,
   figma: "https://cdn.simpleicons.org/figma/F24E1E",
   supabase: "https://cdn.simpleicons.org/supabase/3ECF8E",
   linear: "https://cdn.simpleicons.org/linear/5E6AD2",
   loom: "https://cdn.simpleicons.org/loom/625DF5",
   framer: "https://cdn.simpleicons.org/framer/0055FF",
-  openai: "https://cdn.simpleicons.org/openai/412991",
+  // openai: "https://cdn.simpleicons.org/openai/412991",
+  openai:openai,
   tiktok: "https://cdn.simpleicons.org/tiktok/000000",
   shipbob: "https://cdn.simpleicons.org/shipbob/00A4E4",
   nextjs: "https://cdn.simpleicons.org/nextdotjs/000000",
@@ -33,7 +75,8 @@ export const brandLogos: Record<string, string> = {
   plausible: "https://cdn.simpleicons.org/plausible/5850EC",
   google_analytics: "https://cdn.simpleicons.org/googleanalytics/E37400",
   webflow: "https://cdn.simpleicons.org/webflow/4353FF",
-  bubble: "https://cdn.simpleicons.org/bubble/0D0D0D",
+  // bubble: "https://cdn.simpleicons.org/bubble/0D0D0D",
+  bubble:bubble,
   zapier: "https://cdn.simpleicons.org/zapier/FF4A00",
   airtable: "https://cdn.simpleicons.org/airtable/18BFFF",
   make: "https://cdn.simpleicons.org/make/6D00CC",
@@ -45,7 +88,8 @@ export const brandLogos: Record<string, string> = {
   clay: "https://cdn.simpleicons.org/clay/7B68EE",
   phantom: "https://cdn.simpleicons.org/phantom/AB9FF2",
   n8n: "https://cdn.simpleicons.org/n8n/FF6D5A",
-  canva: "https://cdn.simpleicons.org/canva/00C4CC",
+  // canva: "https://cdn.simpleicons.org/canva/00C4CC",
+  canva:canva,
   adobe: "https://cdn.simpleicons.org/adobe/FF0000",
   midjourney: "https://cdn.simpleicons.org/midjourney/000000",
   elevenlabs: "https://cdn.simpleicons.org/elevenlabs/000000",
@@ -119,6 +163,12 @@ export interface CaseStudy {
   toolsUsed: string[];
   techStack: TechStackItem[];
   revenueHistory: { month: string; revenue: number }[];
+  playbook?: {
+    strategy: string[];
+    sop: { title: string; description: string }[];
+    techStack: { name: string; logo: string; useCase: string }[];
+    distribution: string;
+  };
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -371,6 +421,160 @@ export const caseStudies: CaseStudy[] = [
       { month: "Mar Y2", revenue: 31000 },
     ],
   },
+  {
+    id: "7",
+    title: "How DesignJoy built a $1.5M/yr Agency of One",
+    founder: "Brett Williams",
+    revenue: 125000,
+    expenses: 4500,
+    model: "Productized Service",
+    description: "Unlimited design subscriptions with zero meetings and a 1-man team.",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&auto=format&fit=crop",
+    companyName: "DesignJoy",
+    category: "Agency",
+    verified: true,
+    profitMargin: 96,
+    teamSize: 1,
+    timeToLaunch: "2 weeks",
+    growthRate: 15,
+    story: "Brett started DesignJoy as a side hustle while working a full-time design job. He introduced a radical model: flat-rate monthly subscriptions for unlimited design work, managed entirely through Trello. By removing meetings, calls, and custom proposals, he achieved incredible efficiency. Today, he manages 40+ active clients simultaneously, netting over $1M a year with practically zero overhead.",
+    lessons: [
+      "Productized services scale infinitely better than hourly freelancing",
+      "Asynchronous communication is a feature, not a bug",
+      "Pricing transparency builds immediate trust",
+      "You don't need a massive team to generate massive revenue"
+    ],
+    toolsUsed: ["Trello", "Stripe", "Figma", "Webflow"],
+    techStack: [
+      { name: "Trello", logo: brandLogos.trello, category: "Project Management", description: "Async client request management", url: "https://trello.com" },
+      { name: "Stripe", logo: brandLogos.stripe, category: "Payments", description: "Recurring billing and checkout", url: "https://stripe.com" },
+      { name: "Figma", logo: brandLogos.figma, category: "Design", description: "Core design delivery and collaboration", url: "https://figma.com" },
+    ],
+    revenueHistory: [
+      { month: "Year 1", revenue: 5000 }, { month: "Year 2", revenue: 20000 },
+      { month: "Year 3", revenue: 80000 }, { month: "Year 4", revenue: 125000 }
+    ],
+    playbook: {
+      strategy: [
+        "Productized Service Model: Fixed monthly fee for unlimited design requests.",
+        "Zero Meetings Policy: All communication happens asynchronously via Trello.",
+        "One Task at a Time: Clients can submit infinite requests, but only one is actively worked on."
+      ],
+      sop: [
+        { title: "Client Onboarding", description: "Client subscribes via Stripe. They instantly receive an invite to a personalized Trello board with an introductory video." },
+        { title: "Task Submission", description: "Client creates a card in the 'Requests' column. They add all copy, inspiration, and requirements." },
+        { title: "Delivery", description: "Design is delivered within 48 hours. Client either approves (moves to 'Done') or requests revisions directly on the card." }
+      ],
+      techStack: [
+        { name: "Stripe", logo: "https://cdn.simpleicons.org/stripe/635BFF", useCase: "Recurring subscription payments ($4,995/mo plans)." },
+        { name: "Trello", logo: "https://cdn.simpleicons.org/trello/0052CC", useCase: "The entire client portal and task management system." },
+        { name: "Figma", logo: "https://cdn.simpleicons.org/figma/F24E1E", useCase: "Delivery of all UI/UX and graphic design assets." }
+      ],
+      distribution: "Brett's primary growth engine was viral organic Twitter (X) content. He shared his revenue numbers, his unique 'zero meetings' philosophy, and high-quality design work. This transparency attracted founders who were tired of traditional, slow agency models. He supplemented this with a high-converting, heavily animated Webflow landing page that clearly explained the 'Productized' concept."
+    }
+  },
+  {
+    id: "8",
+    title: "Sweaty Startup: $5M/yr with Self Storage",
+    founder: "Nick Huber",
+    revenue: 416000,
+    expenses: 125000,
+    model: "Traditional Business + Tech",
+    description: "Modernizing a boring, traditional business model with tech and offshore talent.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop",
+    companyName: "Bolt Storage",
+    category: "Real Estate",
+    verified: true,
+    profitMargin: 70,
+    teamSize: 15,
+    timeToLaunch: "6 months",
+    growthRate: 10,
+    story: "Nick took a 'boring' traditional business—self-storage—and applied modern SaaS principles. Instead of having on-site managers, he automated facilities with smart locks, an online booking portal, and a remote customer service team in the Philippines. This drastically reduced overhead, allowing him to acquire underperforming facilities and instantly increase their profitability.",
+    lessons: [
+      "Look for tech-laggard industries where simple software creates a massive moat",
+      "Offshore talent can handle 90% of operational tasks if SOPs are strict",
+      "Unsexy businesses often have the highest profit margins"
+    ],
+    toolsUsed: ["Stripe", "Notion", "Slack", "CallRail"],
+    techStack: [
+      { name: "Slack", logo: brandLogos.slack, category: "Communication", description: "Remote team coordination", url: "https://slack.com" },
+      { name: "Notion", logo: brandLogos.notion, category: "Productivity", description: "Property SOPs and management", url: "https://notion.so" },
+    ],
+    revenueHistory: [
+      { month: "Q1", revenue: 300000 }, { month: "Q2", revenue: 350000 },
+      { month: "Q3", revenue: 380000 }, { month: "Q4", revenue: 416000 }
+    ],
+    playbook: {
+      strategy: [
+        "Acquisition: Buy mom-and-pop storage facilities with low occupancy and poor digital presence.",
+        "Automation: Rip out the physical management office and install remote tech.",
+        "Offshore Ops: Use trained virtual assistants for customer support and remote operations."
+      ],
+      sop: [
+        { title: "Target Identification", description: "Use direct mail and cold calling to find owners looking to sell 'mom-and-pop' facilities." },
+        { title: "Tech Transition", description: "Day 1 of takeover: Install Noke smart locks and switch to Storable management software." },
+        { title: "Remote Support", description: "Route all physical calls to a central VA hub in the Philippines using CallRail and strict call scripts." },
+        { title: "Local SEO Push", description: "Claim Google Business Profile, standardize NAP (Name, Address, Phone), and aggressively collect 5-star reviews via automated SMS." }
+      ],
+      techStack: [
+        { name: "Storable", logo: "", useCase: "Core facility management and inventory backend." },
+        { name: "CallRail", logo: "", useCase: "Tracking marketing ROI and routing calls to remote VAs." },
+        { name: "Noke", logo: "", useCase: "Smart gates and facility access controlled via mobile app." }
+      ],
+      distribution: "Nick built a massive personal brand on Twitter (@sweatystartup) by sharing the harsh realities and incredible profits of 'boring' businesses. This audience became a flywheel for his main business: raising capital. As his Twitter following grew, he used the audience to raise millions in LP capital, allowing him to accelerate his facility acquisitions far beyond what traditional bank financing would allow."
+    }
+  },
+  {
+    id: "9",
+    title: "HeadshotPro: $1M+ ARR AI Product Launch",
+    founder: "Danny Postma",
+    revenue: 110000,
+    expenses: 15000,
+    model: "AI Application",
+    description: "Professional corporate headshots generated entirely by AI.",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop",
+    companyName: "HeadshotPro",
+    category: "Micro-SaaS",
+    verified: true,
+    profitMargin: 86,
+    teamSize: 2,
+    timeToLaunch: "3 weeks",
+    growthRate: 35,
+    story: "Danny rode the early wave of generative AI. He realized that while Stable Diffusion was powerful, the average person couldn't use it. He built a slick, consumer-friendly wrapper that consumed selfies and outputted hyper-realistic corporate headshots. By mastering SEO and programmatic landing pages (e.g., 'Headshots for Real Estate Agents in Austin'), he captured massive search intent and created a highly profitable, self-service SaaS.",
+    lessons: [
+      "AI 'wrappers' are highly profitable if the UX solves a specific, painful problem",
+      "Programmatic SEO is the ultimate growth hack for niche queries",
+      "Speed to market is critical during a platform shift"
+    ],
+    toolsUsed: ["Next.js", "Vercel", "Stripe", "Supabase"],
+    techStack: [
+      { name: "Next.js", logo: brandLogos.nextjs, category: "Framework", description: "Full-stack application framework", url: "https://nextjs.org" },
+      { name: "Vercel", logo: brandLogos.vercel, category: "Hosting", description: "Edge deployments", url: "https://vercel.com" },
+      { name: "Supabase", logo: brandLogos.supabase, category: "Backend", description: "Auth and database", url: "https://supabase.com" },
+    ],
+    revenueHistory: [
+      { month: "Month 1", revenue: 10000 }, { month: "Month 2", revenue: 45000 },
+      { month: "Month 3", revenue: 85000 }, { month: "Month 4", revenue: 110000 }
+    ],
+    playbook: {
+      strategy: [
+        "The Wrapper Model: Take a complex developer API (Replicate) and build an intuitive UI for a specific consumer use-case.",
+        "One-Time Payment: Avoid subscription fatigue; charge $29 for a batch of 120 headshots.",
+        "Programmatic SEO: Auto-generate hundreds of hyper-local landing pages to capture long-tail search traffic."
+      ],
+      sop: [
+        { title: "User Upload", description: "User goes through an optimized onboarding to upload 15-20 diverse selfies. Strict validation ensures high-quality inputs." },
+        { title: "Model Training", description: "Uploads are sent to a Replicate/Astria API to quickly train a custom LoRA model on the user's face." },
+        { title: "Generation", description: "The system generates 120 variations using pre-defined corporate/studio prompts and emails the user when ready." }
+      ],
+      techStack: [
+        { name: "Replicate", logo: "", useCase: "The core AI engine running Stable Diffusion models in the cloud." },
+        { name: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/000000", useCase: "Robust frontend and API routes for handling image uploads." },
+        { name: "Stripe", logo: "https://cdn.simpleicons.org/stripe/635BFF", useCase: "Handling straightforward, one-off checkout flows." }
+      ],
+      distribution: "Danny's masterstroke was Programmatic SEO. Instead of fighting for 'AI Headshots,' he generated thousands of localized pages like 'Best Photographer in [City]' or 'Headshots for [Profession]'. When users landed on these pages, they were pitched the $29 AI alternative instead of a $300 physical photographer. He combined this organic foundation with viral Twitter launches that drove massive initial spikes in traffic."
+    }
+  }
 ];
 
 export const categories = [

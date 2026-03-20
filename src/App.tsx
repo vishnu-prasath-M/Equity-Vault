@@ -8,6 +8,7 @@ import PageLayout from "@/components/PageLayout";
 import Index from "./pages/Index.tsx";
 import CaseStudiesArchive from "./pages/CaseStudiesArchive.tsx";
 import CaseStudyDetail from "./pages/CaseStudyDetail.tsx";
+import CaseStudyPlaybook from "./pages/CaseStudyPlaybook.tsx";
 import IdeaVaultPage from "./pages/IdeaVaultPage.tsx";
 import IdeaDeepDive from "./pages/IdeaDeepDive.tsx";
 import ToolDirectoryPage from "./pages/ToolDirectoryPage.tsx";
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/case-studies" element={<CaseStudiesArchive />} />
               <Route path="/case-study/:id" element={<CaseStudyDetail />} />
+              <Route path="/case-study/:id/playbook" element={<CaseStudyPlaybook />} />
               <Route path="/idea-vault" element={<IdeaVaultPage />} />
               <Route path="/ideas/:id" element={<IdeaDeepDive />} />
               <Route path="/tools" element={<ToolDirectoryPage />} />

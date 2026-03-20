@@ -2,7 +2,7 @@ import { Search, Command, Sparkles, ArrowRight } from "lucide-react";
 import { motion, useAnimationFrame } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { brandLogos } from "@/data/mockData";
-import { DottedSurface } from "@/components/ui/dotted-surface";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 interface HeroSectionProps {
   onSearchOpen: () => void;
@@ -39,7 +39,7 @@ const FloatingLogo = ({ logo, x, y, delay }: { logo: string; x: number; y: numbe
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 0.15, scale: 1 }}
       transition={{ duration: 0.8, delay: delay * 0.5 }}
-      className="absolute pointer-events-none"
+      className="absolute pointer-events-none z-10"
       style={{
         left: `${x}%`,
         top: `${y}%`,
@@ -102,13 +102,7 @@ const TypingEffect = () => {
 
 const HeroSection = ({ onSearchOpen }: HeroSectionProps) => {
   return (
-    <section className="relative pt-32 pb-20 px-4 sm:px-6 overflow-hidden min-h-[600px]">
-      {/* THREE.js Dotted Surface - contained within hero only */}
-      <DottedSurface className="z-0" />
-
-      {/* Animated background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/80 pointer-events-none" />
-
+    <AuroraBackground className="px-4 sm:px-6 w-full max-w-none rounded-none !h-auto min-h-[700px] overflow-hidden">
       {/* Floating logos grid */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {floatingLogos.map((item) => (
@@ -121,18 +115,6 @@ const HeroSection = ({ onSearchOpen }: HeroSectionProps) => {
           />
         ))}
       </div>
-
-      {/* Subtle grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, hsl(240 5.9% 10%) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(240 5.9% 10%) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px'
-        }}
-      />
 
       <div className="relative max-w-4xl mx-auto text-center">
         {/* Badge */}
@@ -246,7 +228,7 @@ const HeroSection = ({ onSearchOpen }: HeroSectionProps) => {
           <span className="hidden sm:inline">Updated daily</span>
         </motion.div>
       </div>
-    </section>
+    </AuroraBackground>
   );
 };
 

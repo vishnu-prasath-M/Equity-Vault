@@ -214,7 +214,7 @@ const IdeaDeepDive: React.FC = () => {
                 {idea.recommendedTools.map((tool) => (
                   <div key={tool} className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-gray-200 transition-colors">
                     <div className="w-8 h-8 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-gray-500" />
+                      <Zap className="w-4 h-4 text-blue-600" />
                     </div>
                     <span className="text-xs font-medium text-gray-700 text-center">{tool}</span>
                   </div>

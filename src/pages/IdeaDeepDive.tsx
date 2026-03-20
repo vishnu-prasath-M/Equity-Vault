@@ -5,6 +5,7 @@ import {
   CheckCircle, ExternalLink, BarChart, Cpu, Star, Users
 } from "lucide-react";
 import { detailedBusinessIdeas, BusinessIdea } from "@/data/detailedBusinessIdeas";
+import { brandLogos } from "@/data/mockData";
 import CoreMetricsTable from "@/components/CoreMetricsTable";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -167,8 +168,8 @@ const IdeaDeepDive: React.FC = () => {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all capitalize ${activeTab === tab
-                  ? "bg-white text-gray-900 shadow-sm"
-                  : "text-gray-500 hover:text-gray-700"
+                ? "bg-white text-gray-900 shadow-sm"
+                : "text-gray-500 hover:text-gray-700"
                 }`}
             >
               {tab === "overview" ? "📊 Overview" : "🗺️ Execution Playbook"}
@@ -211,14 +212,21 @@ const IdeaDeepDive: React.FC = () => {
             <div className="bg-white rounded-2xl border border-gray-100 p-6">
               <h2 className="text-lg font-bold text-gray-900 mb-5">Recommended Tools</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {idea.recommendedTools.map((tool) => (
-                  <div key={tool} className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-gray-200 transition-colors">
-                    <div className="w-8 h-8 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                      <Zap className="w-4 h-4 text-blue-600" />
+                {idea.recommendedTools.map((tool) => {
+                  const logoUrl = brandLogos[tool.toLowerCase()];
+                  return (
+                    <div key={tool} className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-gray-200 transition-colors">
+                      <div className="w-8 h-8 bg-white rounded-lg shadow-sm flex items-center justify-center p-1.5 overflow-hidden">
+                        {logoUrl ? (
+                          <img src={logoUrl} alt={tool} className="w-full h-full object-contain" />
+                        ) : (
+                          <Zap className="w-4 h-4 text-blue-600" />
+                        )}
+                      </div>
+                      <span className="text-xs font-medium text-gray-700 text-center">{tool}</span>
                     </div>
-                    <span className="text-xs font-medium text-gray-700 text-center">{tool}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 

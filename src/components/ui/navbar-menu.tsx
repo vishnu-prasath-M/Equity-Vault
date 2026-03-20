@@ -17,25 +17,31 @@ export const MenuItem = ({
   active,
   item,
   children,
+  to,
 }: {
   setActive: (item: string | null) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
+  to?: string;
 }) => {
+  const content = (
+    <motion.p
+      transition={{ duration: 0.3 }}
+      className="cursor-pointer text-sm text-slate-600 hover:text-slate-900 py-2"
+    >
+      {item}
+    </motion.p>
+  );
+
   return (
-    <div 
-      onMouseEnter={() => setActive(item)} 
+    <div
+      onMouseEnter={() => setActive(item)}
       onMouseLeave={() => setActive(null)}
       className="relative"
     >
-      <motion.p
-        transition={{ duration: 0.3 }}
-        className="cursor-pointer text-sm text-slate-600 hover:text-slate-900 py-2"
-      >
-        {item}
-      </motion.p>
-      {active === item && (
+      {to ? <Link to={to}>{content}</Link> : content}
+      {active === item && children && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -80,23 +86,27 @@ export const ProductItem = ({
   description,
   to,
   src,
+  className = "",
+  imageClassName = "w-20 h-12 object-cover",
 }: {
   title: string;
   description: string;
   to: string;
   src: string;
+  className?: string;
+  imageClassName?: string;
 }) => {
   return (
-    <Link to={to} className="flex space-x-3 group min-w-[200px]">
+    <Link to={to} className={`flex space-x-3 group min-w-[200px] ${className}`}>
       <img
         src={src}
         width={80}
         height={50}
         alt={title}
-        className="shrink-0 rounded-md shadow-sm object-cover w-20 h-12"
+        className={`shrink-0 rounded-md shadow-sm ${imageClassName}`}
       />
       <div>
-        <h4 className="text-sm font-semibold mb-0.5 text-slate-900 group-hover:text-slate-700">
+        <h4 className="text-sm font-semibold mb-0.5 text-slate-900 group-hover:text-slate-700 font-sans-header">
           {title}
         </h4>
         <p className="text-slate-500 text-xs max-w-[10rem] leading-relaxed">

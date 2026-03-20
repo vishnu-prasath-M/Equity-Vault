@@ -54,7 +54,7 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
         <div className="hidden lg:flex items-center">
           <NavMenu setActive={setActive}>
             {/* Case Studies */}
-            <MenuItem setActive={setActive} active={active} item="Case Studies">
+            <MenuItem setActive={setActive} active={active} item="Case Studies" to="/case-studies">
               <div className="flex flex-col gap-4">
                 <div className="grid grid-cols-2 gap-4">
                   {featuredStudies.map((study) => (
@@ -77,7 +77,7 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
             </MenuItem>
 
             {/* Idea Vault */}
-            <MenuItem setActive={setActive} active={active} item="Idea Vault">
+            <MenuItem setActive={setActive} active={active} item="Idea Vault" to="/idea-vault">
               <div className="flex flex-col gap-4">
                 <div className="grid grid-cols-2 gap-4">
                   {trendingIdeas.map((idea) => (
@@ -103,9 +103,9 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
             </MenuItem>
 
             {/* The Stack */}
-            <MenuItem setActive={setActive} active={active} item="The Stack">
-              <div className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-4">
+            <MenuItem setActive={setActive} active={active} item="The Stack" to="/tools">
+              <div className="flex flex-col gap-3">
+                <div className="grid grid-cols-2 gap-3">
                   {topTools.slice(0, 2).map((tool) => (
                     <ProductItem
                       key={tool.id}
@@ -113,6 +113,7 @@ const Navbar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
                       to="/tools"
                       src={tool.logo}
                       description={`${tool.category} • ${tool.rating}★`}
+                      imageClassName="w-10 h-10 object-contain bg-white rounded-lg p-1.5 border border-slate-100 shadow-sm"
                     />
                   ))}
                 </div>

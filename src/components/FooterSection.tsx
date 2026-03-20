@@ -10,16 +10,16 @@ const footerLinks = {
     { label: "Calculator", href: "/calculator" },
   ],
   Resources: [
-    { label: "Newsletter", href: "#" },
-    { label: "Guides", href: "#" },
-    { label: "Community", href: "#" },
-    { label: "Blog", href: "#" },
+    { label: "Newsletter", href: "#newsletter" },
+    { label: "Guides", href: "/guides" },
+    { label: "Resources", href: "/resources" },
+    { label: "Blog", href: "/blog" },
   ],
   Company: [
-    { label: "About", href: "#" },
+    { label: "About", href: "/about" },
     { label: "Careers", href: "#" },
     { label: "Press", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Contact", href: "/contact" },
   ],
   Legal: [
     { label: "Privacy", href: "#" },
@@ -39,55 +39,65 @@ const FooterSection = () => {
   return (
     <footer className="bg-white border-t border-slate-200">
       {/* CTA Section */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)`,
-            backgroundSize: '32px 32px'
-          }} />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+      <div id="newsletter" className="bg-[#050505] border-y border-white/[0.04] relative overflow-hidden">
+        {/* Subtle dot pattern for depth */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)`,
+          backgroundSize: '24px 24px'
+        }} />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-24 sm:py-32 z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl mx-auto text-center"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full mb-6 backdrop-blur-sm">
-              <Zap className="w-4 h-4 text-emerald-400" />
-              <span className="text-xs font-medium text-emerald-300">Join 50,000+ founders</span>
+            {/* Left Content */}
+            <div className="flex-1 text-center lg:text-left">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white mb-5 leading-tight">
+                The top 1% of founders read this.
+              </h2>
+              <p className="text-lg text-slate-400 mb-8 leading-relaxed font-light max-w-2xl mx-auto lg:mx-0">
+                Join 50,000+ builders getting verified income reports, step-by-step business playbooks, and raw founder insights delivered straight to their inbox.
+              </p>
+
+              <div className="flex items-center justify-center lg:justify-start gap-6 text-sm text-slate-500 font-medium">
+                <div className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-emerald-500/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  One email a week
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-emerald-500/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Zero fluff
+                </div>
+              </div>
             </div>
-            
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
-              Ready to join
-              <span className="block text-emerald-400">the top 1%?</span>
-            </h2>
-            
-            <p className="text-lg text-slate-300 leading-relaxed mb-8 max-w-lg mx-auto">
-              Get weekly income reports, verified business playbooks, and exclusive founder insights delivered to your inbox.
-            </p>
-            
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="founder@startup.com"
-                className="flex-1 px-4 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all backdrop-blur-sm"
-              />
-              <Button 
-                type="submit"
-                className="px-6 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold rounded-xl gap-2 transition-colors"
-              >
-                Subscribe
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </form>
-            
-            <p className="mt-4 text-xs text-slate-400">
-              No spam. Unsubscribe anytime. Join the founders who actually build.
-            </p>
+
+            {/* Right Form */}
+            <div className="w-full lg:w-[420px] shrink-0">
+              <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="name@company.com"
+                  className="w-full px-5 py-4 bg-white/5 border border-white/10 text-white rounded-xl placeholder:text-slate-500 outline-none focus:border-white/30 focus:bg-white/10 transition-all font-medium"
+                />
+                <Button
+                  type="submit"
+                  className="w-full h-14 bg-white hover:bg-slate-200 text-black font-semibold rounded-xl transition-colors text-[15px] border-none"
+                >
+                  Join the Vault
+                </Button>
+              </form>
+              <p className="mt-5 text-xs text-slate-500 text-center lg:text-left tracking-wide">
+                No spam. Unsubscribe at any time.
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -98,9 +108,9 @@ const FooterSection = () => {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img 
-                src="/logo.png" 
-                alt="EquityVault" 
+              <img
+                src="/logo.png"
+                alt="EquityVault"
                 className="h-7 w-auto"
               />
             </div>

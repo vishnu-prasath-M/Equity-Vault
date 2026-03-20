@@ -11,7 +11,7 @@ export default function AuthPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
-  
+
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,8 +81,8 @@ export default function AuthPage() {
             {isLogin ? 'Welcome back' : 'Create your account'}
           </h2>
           <p className="mt-2 text-sm text-slate-600">
-            {isLogin 
-              ? 'Sign in to access your saved ideas and profile' 
+            {isLogin
+              ? 'Sign in to access your saved ideas and profile'
               : 'Join 50,000+ founders building profitable businesses'}
           </p>
         </div>

@@ -16,6 +16,11 @@ import ProfitabilityCalculator from "./pages/ProfitabilityCalculator.tsx";
 import AuthPage from "./pages/AuthPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import About from "./pages/About.tsx";
+import Contact from "./pages/Contact.tsx";
+import Blog from "./pages/Blog.tsx";
+import Guides from "./pages/Guides.tsx";
+import Resources from "./pages/Resources.tsx";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +43,11 @@ const App = () => (
               <Route path="/calculator" element={<ProfitabilityCalculator />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/guides" element={<Guides />} />
+              <Route path="/resources" element={<Resources />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </PageLayout>
